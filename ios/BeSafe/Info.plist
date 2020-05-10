@@ -24,6 +24,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+  	<string>This app uses Bluetooth to check if you’ve been nearby someone who tested positive for COVID-19.</string>
+  	<key>NSBluetoothPeripheralUsageDescription</key>
+  	<string>This app uses Bluetooth to check if you’ve been nearby someone who tested positive for COVID-19.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

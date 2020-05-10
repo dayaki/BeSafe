@@ -6,7 +6,7 @@ import {Colors} from '../constants/colors';
 import {InfoIcon, BackIcon} from '../../assets/icons';
 // import {wp, hp} from '../constants/utils';
 
-const Intro = () => {
+const Intro = ({navigation}) => {
   const slider = useRef();
 
   const slides = [
@@ -48,9 +48,11 @@ const Intro = () => {
     },
   ];
 
+  const handleContinue = () => {
+    navigation.navigate('SetBluetooth');
+  };
+
   const changeSlide = (type, index) => {
-    console.log('INDEX', index + 1);
-    //   setSliderIndex(index + 1);
     if (type === 'next') {
       slider.current.goToSlide(index + 1);
     } else {
@@ -58,18 +60,22 @@ const Intro = () => {
     }
   };
 
-  const renderPagination = index => {
-    return (
-      <Pagination>
-        <BackBtn activeOpacity={0.8} onPress={() => changeSlide('prev', index)}>
-          <BackIcon width={7.41} height={12} />
-        </BackBtn>
-        <NextBtn activeOpacity={0.8} onPress={() => changeSlide('next', index)}>
-          <NextText>Next</NextText>
-        </NextBtn>
-      </Pagination>
-    );
-  };
+  const renderPagination = index => (
+    <Pagination>
+      <BackBtn
+        activeOpacity={0.8}
+        onPress={index > 0 ? () => changeSlide('prev', index) : null}>
+        <BackIcon width={7.41} height={12} />
+      </BackBtn>
+      <NextBtn
+        activeOpacity={0.8}
+        onPress={
+          index < 5 ? () => changeSlide('next', index) : () => handleContinue()
+        }>
+        <NextText>{index < 5 ? 'Next' : 'Continue'}</NextText>
+      </NextBtn>
+    </Pagination>
+  );
 
   const renderItem = ({item}) => {
     return (
@@ -99,6 +105,7 @@ const Intro = () => {
         showNextButton={false}
         showPrevButton={false}
         renderPagination={renderPagination}
+        onSlideChange={index => console.log(index)}
       />
     </Container>
   );
@@ -122,6 +129,7 @@ const Title = styled.Text`
   font-weight: 500;
   font-size: 17px;
   line-height: 24px;
+  font-family: 'Avenir-Book';
 `;
 const Info = styled.TouchableOpacity`
   position: absolute;
@@ -153,6 +161,7 @@ const Text = styled.Text`
   text-align: left;
   line-height: 24px;
   color: ${Colors.black};
+  font-family: 'Avenir-Medium';
 `;
 const Pagination = styled.View`
   flex-direction: row;
@@ -185,6 +194,7 @@ const NextText = styled.Text`
   font-weight: 500;
   font-size: 17px;
   line-height: 22px;
+  font-family: 'Avenir-Light';
 `;
 
 export default Intro;

@@ -21,6 +21,39 @@ export const BackIcon = props => (
   </Svg>
 );
 
+export const BluetoothIcon = props => (
+  <Svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" {...props}>
+    <Path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M13 5.83l1.88 1.88-1.6 1.6 1.41 1.41 3.02-3.02L12 2h-1v5.03l2 2v-3.2zM5.41 4L4 5.41 10.59 12 5 17.59 6.41 19 11 14.41V22h1l4.29-4.29 2.3 2.29L20 18.59 5.41 4zm9.47 12.29L13 14.41v3.76l1.88-1.88z"
+      fill={props.fill ? props.fill : '#000'}
+    />
+  </Svg>
+);
+
+export const BellIcon = props => (
+  <Svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" {...props}>
+    <Path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M18 15.75v-5c0-3.07-1.63-5.64-4.5-6.32v-.68c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.11 6 7.67 6 10.75v5l-2 2v1h16v-1l-2-2zm-6 6c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-4-5h8v-6c0-2.48-1.51-4.5-4-4.5s-4 2.02-4 4.5v6zM7.58 3.83L6.15 2.4c-2.4 1.83-3.98 4.65-4.12 7.85h2a8.445 8.445 0 013.55-6.42zm14.39 6.42h-2a8.495 8.495 0 00-3.54-6.42l1.42-1.43c2.39 1.83 3.97 4.65 4.12 7.85z"
+      fill="#fff"
+    />
+  </Svg>
+);
+
+export const BellOffIcon = props => (
+  <Svg width="1em" height="1em" viewBox="0 0 18 20" fill="none" {...props}>
+    <Path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M12.305 8.75c0-2.48-1.51-4.5-4-4.5-.144 0-.282.017-.419.034a9.84 9.84 0 01-.131.016l-1.64-1.64.105-.038c.188-.07.383-.141.585-.192v-.68c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v.68c2.87.68 4.5 3.25 4.5 6.32v2.1l-2-2v-.1zm-2 9c0 1.1-.9 2-2 2s-2-.9-2-2h4zM1.715 1.1L.305 2.51l2.81 2.81c-.52 1-.81 2.17-.81 3.43v5l-2 2v1h14.24l1.74 1.74 1.41-1.41L1.715 1.1zm2.59 13.65h8v-.24l-7.66-7.66c-.22.58-.34 1.22-.34 1.9v6z"
+      fill="#000"
+    />
+  </Svg>
+);
+
 export const ForwardIcon = props => (
   <Svg width="1em" height="1em" viewBox="0 0 24 16" {...props}>
     <Path
