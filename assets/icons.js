@@ -54,6 +54,19 @@ export const BellOffIcon = props => (
   </Svg>
 );
 
+export const PhoneOffIcon = props => (
+  <Svg width="1em" height="1em" viewBox="0 0 20 20" fill="none" {...props}>
+    <Path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M14.333 4.167v7.175L16 13.008V2.5c0-.917-.75-1.667-1.667-1.667H6c-.592 0-1.108.309-1.4.776l2.558 2.558h7.175zM1.408 3.133l2.925 2.925V17.5c0 .917.75 1.667 1.667 1.667h8.333c.85 0 1.542-.642 1.65-1.459l1.434 1.434 1.175-1.175L2.583 1.958 1.408 3.133zm12.7 12.7L6 7.726v8.109h8.108z"
+      fill="#fff"
+    />
+  </Svg>
+);
+
+// Not in use
+
 export const ForwardIcon = props => (
   <Svg width="1em" height="1em" viewBox="0 0 24 16" {...props}>
     <Path

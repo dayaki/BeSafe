@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import {Colors} from './colors';
 
 export const BigCircle = () => (
-  <>
+  <Container>
     <OuterCircle>
       <OuterrCircle>
         <OuterrrCircle>
@@ -13,13 +13,18 @@ export const BigCircle = () => (
         </OuterrrCircle>
       </OuterrCircle>
     </OuterCircle>
-  </>
+  </Container>
 );
 
+const Container = styled.View`
+  width: 100%;
+  position: absolute;
+  top: 10px;
+`;
 const OuterCircle = styled.View`
-  width: 360px;
-  height: 360px;
-  border-radius: 180px;
+  width: 400px;
+  height: 400px;
+  border-radius: 200px;
   border: 1px solid rgba(47, 128, 237, 0.04);
   justify-content: center;
   align-items: center;

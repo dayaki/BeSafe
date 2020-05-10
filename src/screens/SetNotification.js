@@ -100,27 +100,6 @@ const SetNotification = ({navigation}) => {
   );
 };
 
-const BluetoothAlt = styled.View`
-  width: 56px;
-  height: 56px;
-  border-radius: 26px;
-  justify-content: center;
-  align-items: center;
-  background: ${Colors.lightgray};
-`;
-const LinkBtn = styled.TouchableOpacity`
-  padding-bottom: 1px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${Colors.blue};
-  margin-top: 40px;
-`;
-const LinkText = styled.Text`
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
-  text-align: center;
-  color: ${Colors.blue};
-`;
 const Container = styled.View`
   flex: 1;
   background: ${Colors.white};
@@ -196,6 +175,27 @@ const ActionText = styled.Text`
   font-weight: 500;
   font-size: 17px;
   line-height: 22px;
+`;
+const BluetoothAlt = styled.View`
+  width: 56px;
+  height: 56px;
+  border-radius: 26px;
+  justify-content: center;
+  align-items: center;
+  background: ${Colors.lightgray};
+`;
+const LinkBtn = styled.TouchableOpacity`
+  padding-bottom: 1px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${Colors.blue};
+  margin-top: 40px;
+`;
+const LinkText = styled.Text`
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 22px;
+  text-align: center;
+  color: ${Colors.blue};
 `;
 
 export default SetNotification;
