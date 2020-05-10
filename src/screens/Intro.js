@@ -114,7 +114,6 @@ const Intro = ({navigation}) => {
 const Container = styled.View`
   background-color: #fff;
   flex: 1;
-  padding: 50px 0px;
   align-items: center;
 `;
 const Header = styled.View`
@@ -138,13 +137,14 @@ const Info = styled.TouchableOpacity`
 const Slider = styled.View`
   width: 100%;
   height: 100%;
-  padding: 50px 0px;
+  /* padding: 10px 0px; */
   align-items: center;
 `;
 const ImageWrapper = styled.View`
   width: ${Dimensions.get('window').width}px;
   height: 315px;
-  margin-top: 70px;
+  margin-top: 20px;
+  /* margin-top: 70px; */
 `;
 const Image = styled.Image`
   width: 100%;
@@ -154,7 +154,7 @@ const TextWrapper = styled.View`
   align-items: center;
   width: 80%;
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
 `;
 const Text = styled.Text`
   font-size: 17px;
@@ -168,7 +168,7 @@ const Pagination = styled.View`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  padding: 20px 30px;
+  padding: 10px 30px;
 `;
 const BackBtn = styled.TouchableOpacity`
   background: ${Colors.lightgray};

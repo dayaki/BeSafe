@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Platform} from 'react-native';
+import React, {useEffect} from 'react';
+import {Platform, Linking} from 'react-native';
 import styled from 'styled-components/native';
 import {useBluetoothStatus} from 'react-native-bluetooth-status';
 import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
@@ -7,13 +7,13 @@ import {BluetoothIcon} from '../../assets/icons';
 import {Colors} from '../constants/colors';
 
 const SetBluetooth = ({navigation}) => {
-  const [btState, setBtState] = useState(null);
-  const [btStatus, isPending, setBluetooth] = useBluetoothStatus();
+  const [btStatus, , setBluetooth] = useBluetoothStatus();
 
   useEffect(() => {
-    // console.log(btStatus, isPending);
-    // checkPermission();
-  }, []);
+    if (!btStatus && Platform.OS === 'ios') {
+      checkPermission();
+    }
+  }, [btStatus]);
 
   const checkPermission = () => {
     check(PERMISSIONS.IOS.BLUETOOTH_PERIPHERAL)
@@ -46,7 +46,7 @@ const SetBluetooth = ({navigation}) => {
     if (Platform.OS === 'android') {
       setBluetooth();
     } else {
-      // open settings
+      Linking.openSettings();
     }
   };
 
@@ -56,36 +56,43 @@ const SetBluetooth = ({navigation}) => {
 
   return (
     <Container>
-      {/* <BlueTooth>
-        <BluetoothIcon width={24} height={24} />
-      </BlueTooth>
-      <Title>Please enable Bluetooth</Title>
-      <SubText>
-        This app needs Bluetooth to start {'\n'}anonymous contact tracing.
-      </SubText>
-      <Text>This might slightly impact battery life.</Text>
-      <ActionBtn activeOpacity={0.8} onPress={activateBluetooth}>
-        <ActionText>
-          {Platform.OS === 'android' ? 'Enable Bluetooth' : 'Settings'}
-        </ActionText>
-      </ActionBtn> */}
-      <BluetoothWrapper>
-        <OuterCircle>
-          <OuterrCircle>
-            <Circle>
-              <BluetoothIcon width={24} height={24} fill="#fff" />
-            </Circle>
-          </OuterrCircle>
-        </OuterCircle>
-      </BluetoothWrapper>
-      <Title>Bluetooth enabled</Title>
-      <SubText>
-        This app uses Bluetooth for anonymous {'\n'} contact tracing.
-      </SubText>
-      <Text>This might slightly impact battery life.</Text>
-      <ActionBtn activeOpacity={0.8} onPress={nextStep}>
-        <ActionText>Continue</ActionText>
-      </ActionBtn>
+      {!btStatus ? (
+        <>
+          <BlueTooth>
+            <BluetoothIcon width={24} height={24} />
+          </BlueTooth>
+          <Title>Please enable Bluetooth</Title>
+          <SubText>
+            This app needs Bluetooth to start {'\n'}anonymous contact tracing.
+          </SubText>
+          <Text>This might slightly impact battery life.</Text>
+          <ActionBtn activeOpacity={0.8} onPress={activateBluetooth}>
+            <ActionText>
+              {Platform.OS === 'android' ? 'Enable Bluetooth' : 'Settings'}
+            </ActionText>
+          </ActionBtn>
+        </>
+      ) : (
+        <>
+          <BluetoothWrapper>
+            <OuterCircle>
+              <OuterrCircle>
+                <Circle>
+                  <BluetoothIcon width={24} height={24} fill="#fff" />
+                </Circle>
+              </OuterrCircle>
+            </OuterCircle>
+          </BluetoothWrapper>
+          <Title>Bluetooth enabled</Title>
+          <SubText>
+            This app uses Bluetooth for anonymous {'\n'} contact tracing.
+          </SubText>
+          <Text>This might slightly impact battery life.</Text>
+          <ActionBtn activeOpacity={0.8} onPress={nextStep}>
+            <ActionText>Continue</ActionText>
+          </ActionBtn>
+        </>
+      )}
     </Container>
   );
 };

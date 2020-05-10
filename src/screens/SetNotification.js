@@ -1,46 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {Platform, Linking} from 'react-native';
 import styled from 'styled-components/native';
-import {useBluetoothStatus} from 'react-native-bluetooth-status';
-import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import {BellIcon, BellOffIcon} from '../../assets/icons';
 import {Colors} from '../constants/colors';
 
 const SetNotification = ({navigation}) => {
-  const [ntState, setNtState] = useState(1);
-  const [btStatus, isPending, setBluetooth] = useBluetoothStatus();
+  const [ntState, setNtState] = useState(0);
 
   useEffect(() => {
     // console.log(btStatus, isPending);
     // checkPermission();
   }, []);
-
-  const checkPermission = () => {
-    check(PERMISSIONS.IOS.BLUETOOTH_PERIPHERAL)
-      .then(result => {
-        switch (result) {
-          case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            );
-            break;
-          case RESULTS.DENIED:
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            );
-            break;
-          case RESULTS.GRANTED:
-            console.log('The permission is granted');
-            break;
-          case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
-            break;
-        }
-      })
-      .catch(error => {
-        console.log('error', error);
-      });
-  };
 
   const activateNotification = () => {
     if (Platform.OS === 'android') {

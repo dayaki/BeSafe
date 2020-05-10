@@ -241,6 +241,8 @@ PODS:
     - React
   - react-native-ito (1.0.0):
     - React
+  - react-native-notifications (3.2.0):
+    - React
   - react-native-safe-area-context (0.7.3):
     - React
   - React-RCTActionSheet (0.62.2):
@@ -358,6 +360,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-bluetooth-status (from `../node_modules/react-native-bluetooth-status`)
   - react-native-ito (from `../node_modules/react-native-ito`)
+  - react-native-notifications (from `../node_modules/react-native-notifications`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -430,6 +433,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-bluetooth-status"
   react-native-ito:
     :path: "../node_modules/react-native-ito"
+  react-native-notifications:
+    :path: "../node_modules/react-native-notifications"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
@@ -497,6 +502,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 512e560d0e985d0e8c479a54a4e5c147a9c83493
   react-native-bluetooth-status: a15709bd2ddcdea5e56c00333b760eb92e227f41
   react-native-ito: cd4e6a3988ac36da1906f3e2180ac1c59e40c263
+  react-native-notifications: 7bee2e096de2c4105b836d979af454ff3662265c
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c
   React-RCTAnimation: 49ab98b1c1ff4445148b72a3d61554138565bad0
