@@ -1,19 +1,29 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Platform, Linking} from 'react-native';
 import styled from 'styled-components/native';
-import {useBluetoothStatus} from 'react-native-bluetooth-status';
+import {
+  useBluetoothStatus,
+  BluetoothStatus,
+} from 'react-native-bluetooth-status';
 import {check, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import {BluetoothIcon} from '../../assets/icons';
 import {Colors} from '../constants/colors';
 
 const SetBluetooth = ({navigation}) => {
-  const [btStatus, , setBluetooth] = useBluetoothStatus();
+  const [btState, setBtState] = useState(false);
+  const [btStatus] = useBluetoothStatus();
 
   useEffect(() => {
-    if (!btStatus && Platform.OS === 'ios') {
+    getBluetoothState();
+  });
+
+  const getBluetoothState = async () => {
+    const isEnabled = await BluetoothStatus.state();
+    setBtState(isEnabled);
+    if (!isEnabled && Platform.OS === 'ios') {
       checkPermission();
     }
-  }, [btStatus]);
+  };
 
   const checkPermission = () => {
     check(PERMISSIONS.IOS.BLUETOOTH_PERIPHERAL)
@@ -44,7 +54,7 @@ const SetBluetooth = ({navigation}) => {
 
   const activateBluetooth = () => {
     if (Platform.OS === 'android') {
-      setBluetooth();
+      BluetoothStatus.enable();
     } else {
       Linking.openSettings();
     }
@@ -56,7 +66,7 @@ const SetBluetooth = ({navigation}) => {
 
   return (
     <Container>
-      {!btStatus ? (
+      {!btState && !btStatus ? (
         <>
           <BlueTooth>
             <BluetoothIcon width={24} height={24} />

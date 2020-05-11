@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Platform, Linking} from 'react-native';
 import styled from 'styled-components/native';
+import {Notifications} from 'react-native-notifications';
 import {BellIcon, BellOffIcon} from '../../assets/icons';
 import {Colors} from '../constants/colors';
 
@@ -8,13 +9,25 @@ const SetNotification = ({navigation}) => {
   const [ntState, setNtState] = useState(0);
 
   useEffect(() => {
-    // console.log(btStatus, isPending);
-    // checkPermission();
-  }, []);
+    checkStatus();
+  });
+
+  const checkStatus = async () => {
+    Notifications.isRegisteredForRemoteNotifications().then(state => {
+      if (state) {
+        navigation.navigate('Home');
+      }
+    });
+  };
 
   const activateNotification = () => {
     if (Platform.OS === 'android') {
-      setBluetooth();
+      // Notifications.registerRemoteNotifications();
+      Notifications.events().registerRemoteNotificationsRegistered(token => {
+        // Save device token to reduz store
+        console.log('======TOEKN: ', token);
+        nextStep();
+      });
     } else {
       // open settings
     }

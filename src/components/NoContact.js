@@ -1,15 +1,17 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import styled from 'styled-components/native';
 import {
   connectActionSheet,
   useActionSheet,
 } from '@expo/react-native-action-sheet';
+
 import {Dimensions} from 'react-native';
 import {Colors} from '../constants/colors';
 import {BottomSheet} from './BottomSheet';
-import {PhoneOffIcon} from '../../assets/icons';
+import {LinkBtn} from './LinkBtn';
+import {PhoneOffIcon, BluetoothIcon} from '../../assets/icons';
 
-const NoContact = () => {
+const NoContact = ({btState, trState}) => {
   const symptomsModal = useRef();
   const learnmoreModal = useRef();
   const {showActionSheetWithOptions} = useActionSheet();
@@ -50,71 +52,66 @@ const NoContact = () => {
         render={<RenderSymptoms />}
       />
 
-      {/* <Title>No contact detected</Title>
-      <Text>
-        Based on your data, you have not been nearby someone who tested positive
-        for COVID-19.
-      </Text> */}
-      <InfoBox>
-        <InfoTitle>
-          <PhoneOffIcon width={20} height={20} /> Contact tracing off
-        </InfoTitle>
-        <InfoText>
-          You will not be notified if you have been nearby someone who tested
-          positive for COVID-19.
-        </InfoText>
-        <InfoBtn>
-          <InfoBtnText>Turn on</InfoBtnText>
-        </InfoBtn>
-      </InfoBox>
+      {btState && trState && (
+        <>
+          <Title>No contact detected</Title>
+          <Text>
+            Based on your data, you have not been nearby someone who tested
+            positive for COVID-19.
+          </Text>
+        </>
+      )}
+
+      {!trState && (
+        <InfoBox>
+          <InfoHeader>
+            <PhoneOffIcon width={20} height={20} />
+            <InfoTitle>Contact tracing off</InfoTitle>
+          </InfoHeader>
+          <InfoText>
+            You will not be notified if you have been nearby someone who tested
+            positive for COVID-19.
+          </InfoText>
+          <InfoBtn activeOpacity={0.8}>
+            <InfoBtnText>Turn on</InfoBtnText>
+          </InfoBtn>
+          <LinkBtn text="Information about contact tracing" color="#fff" />
+        </InfoBox>
+      )}
+
+      {!btState && (
+        <InfoBox>
+          <InfoHeader>
+            <BluetoothIcon width={20} height={20} fill="#fff" />
+            <InfoTitle>Bluetooth disabled</InfoTitle>
+          </InfoHeader>
+          <InfoText>
+            Please enable Bluetooth in your device settings to start contact
+            tracing.
+          </InfoText>
+          <InfoBtn activeOpacity={0.8}>
+            <InfoBtnText>Open Settings</InfoBtnText>
+          </InfoBtn>
+          <LinkBtn text="How to enable Bluetooth" color="#fff" />
+        </InfoBox>
+      )}
+
       <Button activeOpacity={0.8} onPress={() => symptomsModal.current.open()}>
         <ButtonText>Check for symptoms</ButtonText>
       </Button>
       <Button activeOpacity={0.8}>
         <ButtonText>Learn more</ButtonText>
       </Button>
-      <LinkBtn activeOpacity={0.8} onPress={() => showActionSheet()}>
-        <LinkText>Turn off contact tracing</LinkText>
-      </LinkBtn>
+
+      <LinkBtn
+        text="Turn off contact tracing"
+        noline
+        onPress={() => showActionSheet()}
+      />
     </Container>
   );
 };
 
-const InfoBox = styled.View`
-  width: 280px;
-  height: 230px;
-  background: ${Colors.black};
-  border-radius: 8px;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-`;
-const InfoTitle = styled.Text`
-  color: ${Colors.white};
-  font-family: 'Avenir-Black';
-  font-weight: 600;
-  font-size: 17px;
-  line-height: 24px;
-  text-align: center;
-`;
-const InfoText = styled.Text`
-  font-family: 'Avenir-Book';
-  font-size: 15px;
-  line-height: 20px;
-  text-align: center;
-  color: ${Colors.white};
-  margin-top: 10px;
-`;
-const InfoBtn = styled.TouchableOpacity`
-  width: 248px;
-  height: 44px;
-  background: ${Colors.white};
-  border-radius: 40px;
-  justify-content: center;
-  align-items: center;
-  margin: 15px 0px;
-`;
-const InfoBtnText = styled.Text``;
 const Container = styled.View`
   width: 264px;
   align-self: center;
@@ -154,20 +151,47 @@ const ButtonText = styled.Text`
   text-align: center;
   color: ${Colors.black};
 `;
-const LinkBtn = styled.TouchableOpacity`
-  margin-top: 30px;
+const InfoBox = styled.View`
+  width: 280px;
+  height: 230px;
+  background: ${Colors.black};
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 `;
-const LinkText = styled.Text`
-  font-family: 'Avenir-Book';
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 22px;
+const InfoHeader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+`;
+const InfoTitle = styled.Text`
+  color: ${Colors.white};
+  font-family: 'Avenir-Black';
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 24px;
   text-align: center;
-  color: #696969;
+  margin-left: 7px;
 `;
-const Content = styled.View`
-  padding-top: 20px;
+const InfoText = styled.Text`
+  font-family: 'Avenir-Book';
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+  color: ${Colors.white};
+  margin-top: 10px;
 `;
+const InfoBtn = styled.TouchableOpacity`
+  width: 248px;
+  height: 44px;
+  background: ${Colors.white};
+  border-radius: 40px;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0px;
+`;
+const InfoBtnText = styled.Text``;
 
 const ConnectedApp = connectActionSheet(NoContact);
 
